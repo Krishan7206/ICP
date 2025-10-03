@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> ret = new ArrayList<>();
+        backtrack(n, 1, new ArrayList<>(), k, ret);
+        return ret;
+    }
+
+    void backtrack(int n, int i, List<Integer> cur, int k, List<List<Integer>> ret) {
+        if (cur.size() == k) {
+            ret.add(new ArrayList<>(cur));
+            return;
+        }
+        if (cur.size() + (n - i + 1) < k) return;
+
+        cur.add(i);
+        backtrack(n, i+1, cur, k, ret);
+        cur.remove(cur.size()-1);
+
+        backtrack(n, i+1, cur, k, ret);
+    }
+}
